@@ -1084,6 +1084,35 @@ add_test (pbrt_unit_test pbrt_test)
 
 set_property (TARGET pbrt_test PROPERTY FOLDER "cmd")
 
+
+##################
+# Benchmark
+
+file(GLOB_RECURSE
+	BENCHMARK_FILES
+	${PROJECT_SOURCE_DIR}/src/pbrt/cmd/benchmark/*.*)
+
+set (PBRT_BENCHMARK_SOURCE
+  src/pbrt/shapes_benchmark.cpp
+  )
+
+add_executable (pbrt_benchmark src/pbrt/cmd/pbrt_benchmark.cpp ${PBRT_BENCHMARK_SOURCE} ${BENCHMARK_FILES})
+source_group("benchmark" FILES ${BENCHMARK_FILES})
+
+target_link_libraries (pbrt_benchmark PRIVATE ${ALL_PBRT_LIBS} pbrt_opt pbrt_warnings)
+target_compile_definitions (pbrt_benchmark PRIVATE ${PBRT_DEFINITIONS} BENCHMARK_STATIC_DEFINE)
+target_include_directories (pbrt_benchmark PRIVATE src src/ext src/pbrt/cmd/benchmark/include ${DOUBLE_CONVERSION_INCLUDE})
+target_compile_options(pbrt_benchmark PUBLIC ${PBRT_CXX_FLAGS})
+if (WIN32)
+  target_link_libraries(pbrt_benchmark PRIVATE "Shlwapi.lib")
+endif()
+
+add_sanitizers (pbrt_benchmark)
+
+add_test (pbrt_unit_test pbrt_benchmark)
+
+set_property (TARGET pbrt_benchmark PROPERTY FOLDER "cmd")
+
 ###############################
 # Installation
 
