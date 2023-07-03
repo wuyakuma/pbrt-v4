@@ -185,7 +185,7 @@ static void BM_RandomBoundsRayIntersection(benchmark::State& state) {
 }
 BENCHMARK(BM_RandomBoundsRayIntersection)->Ranges({{1 << 10, 8 << 10}, {256, 1024}});
 
-static void BM_RandomBoundsRayIntersection2(benchmark::State& state) {
+static void BM_RandomBoundsRayIntersectionTest(benchmark::State& state) {
     int64_t BoundsCount = state.range(0);
     int64_t RayCount = state.range(1);
 
@@ -206,7 +206,7 @@ static void BM_RandomBoundsRayIntersection2(benchmark::State& state) {
 
     state.SetItemsProcessed(state.iterations() * BoundsCount * RayCount);
 }
-BENCHMARK(BM_RandomBoundsRayIntersection2)->Ranges({{1 << 10, 8 << 10}, {256, 1024}});
+BENCHMARK(BM_RandomBoundsRayIntersectionTest)->Ranges({{1 << 10, 8 << 10}, {256, 1024}});
 
 static void BM_RandomTriangleRayIntersection(benchmark::State& state) {
     int64_t TriangleCount = state.range(0);
@@ -229,7 +229,7 @@ static void BM_RandomTriangleRayIntersection(benchmark::State& state) {
 }
 BENCHMARK(BM_RandomTriangleRayIntersection)->Ranges({{1 << 10, 8 << 10}, {256, 1024}});
 
-static void BM_RandomTriangleRayIntersection2(benchmark::State& state) {
+static void BM_RandomTriangleRayIntersectionTest(benchmark::State& state) {
     int64_t TriangleCount = state.range(0);
     int64_t RayCount = state.range(1);
 
@@ -247,4 +247,4 @@ static void BM_RandomTriangleRayIntersection2(benchmark::State& state) {
 
     state.SetItemsProcessed(state.iterations() * TriangleCount * RayCount);
 }
-BENCHMARK(BM_RandomTriangleRayIntersection2)->Ranges({{1 << 10, 8 << 10}, {256, 1024}});
+BENCHMARK(BM_RandomTriangleRayIntersectionTest)->Ranges({{1 << 10, 8 << 10}, {256, 1024}});
