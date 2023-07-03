@@ -34,11 +34,11 @@ struct FRandomBounds {
         for (int i = 0; i < Count; ++i) {
             Bounds[i] =
                 Bounds3f(Point3f(Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                                 Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                                 Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x)),
+                                 Lerp(rng.Uniform<float>(), Range.pMin.y, Range.pMax.y),
+                                 Lerp(rng.Uniform<float>(), Range.pMin.z, Range.pMax.z)),
                          Point3f(Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                                 Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                                 Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x)));
+                                 Lerp(rng.Uniform<float>(), Range.pMin.y, Range.pMax.y),
+                                 Lerp(rng.Uniform<float>(), Range.pMin.z, Range.pMax.z)));
         }
     }
 };
@@ -69,14 +69,14 @@ struct FRandomTriangle {
         for (int i = 0; i < Count; ++i) {
             const Point3f P[3] = {
                 Point3f(Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                        Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                        Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x)),
+                        Lerp(rng.Uniform<float>(), Range.pMin.y, Range.pMax.y),
+                        Lerp(rng.Uniform<float>(), Range.pMin.z, Range.pMax.z)),
                 Point3f(Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                        Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                        Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x)),
+                        Lerp(rng.Uniform<float>(), Range.pMin.y, Range.pMax.y),
+                        Lerp(rng.Uniform<float>(), Range.pMin.z, Range.pMax.z)),
                 Point3f(Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                        Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                        Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x)),
+                        Lerp(rng.Uniform<float>(), Range.pMin.y, Range.pMax.y),
+                        Lerp(rng.Uniform<float>(), Range.pMin.z, Range.pMax.z)),
             };
 
             Vector3f Z = Normalize(Cross(P[2] - P[0], P[1] - P[0]));
@@ -137,9 +137,10 @@ struct FRandomRays {
 
         for (int i = 0; i < Count; ++i) {
             const Vector3f Dir = SampleUniformSphere(Point2f(rng.Uniform<float>(), rng.Uniform<float>()));
-            Rays[i] = Ray(Point3f(Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
+            Rays[i] = Ray(Point3f(
                 Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x),
-                Lerp(rng.Uniform<float>(), Range.pMin.x, Range.pMax.x)),
+                Lerp(rng.Uniform<float>(), Range.pMin.y, Range.pMax.y),
+                Lerp(rng.Uniform<float>(), Range.pMin.z, Range.pMax.z)),
                 Dir);
             InvDirs[i].InvDir = Vector3f(1.0f / Dir.x, 1.0f / Dir.y, 1.0f / Dir.z);
 
